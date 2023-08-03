@@ -1,3 +1,54 @@
 Atualizaçoese mudanças
 
 Dia 1
+
+Definição de atributo  em  POO para JAVA
+
+Em Programação Orientada a Objetos (POO) em Java, um atributo é uma variável declarada dentro de uma classe que representa uma característica ou estado específico de um objeto. Os atributos são também conhecidos como campos ou propriedades da classe. Eles permitem que os objetos criados a partir dessa classe possuam seus próprios valores individuais para esses atributos.
+
+Em Java, os atributos são definidos dentro da declaração da classe, fora de qualquer método. A estrutura básica para declarar atributos em uma classe Java é a seguinte:
+
+```java
+public class MinhaClasse {
+    tipoDoAtributo nomeDoAtributo1;
+    tipoDoAtributo nomeDoAtributo2;
+    // ...
+    tipoDoAtributo nomeDoAtributoN;
+}
+```
+
+Onde:
+
+- `tipoDoAtributo` é o tipo de dados do atributo (por exemplo, `int`, `double`, `String`, etc.);
+- `nomeDoAtributo1`, `nomeDoAtributo2`, ..., `nomeDoAtributoN` são os nomes dos atributos.
+
+Por exemplo, se tivéssemos uma classe "Carro", poderíamos definir os atributos dessa classe da seguinte maneira:
+
+```java
+public class Carro {
+    String marca;
+    String modelo;
+    int ano;
+    String cor;
+    int quilometragem;
+}
+```
+
+Agora, quando criarmos instâncias dessa classe, cada objeto do tipo "Carro" terá seus próprios valores específicos para esses atributos. Por exemplo:
+
+```java
+Carro meuCarro = new Carro();
+meuCarro.marca = "Ford";
+meuCarro.modelo = "Focus";
+meuCarro.ano = 2020;
+meuCarro.cor = "Prata";
+meuCarro.quilometragem = 50000;
+```
+
+Assim, o atributo "marca" do objeto "meuCarro" possui o valor "Ford", o atributo "ano" possui o valor "2020" e assim por diante.
+
+Os atributos em Java permitem representar o estado dos objetos e são essenciais para a modelagem de classes e objetos em programação orientada a objetos. Eles encapsulam os dados que pertencem a uma classe e definem as características que tornam cada objeto único e distinto de outros objetos da mesma classe.
+
+
+
+
