@@ -13,6 +13,8 @@ public class Programa05 {
 		}else { 
 			numero = 7;
 		}
+		
+		Operador Ternario
 		*/
 		numero = (valor > 0)? valor : 7;
 		System.out.println(numero);
