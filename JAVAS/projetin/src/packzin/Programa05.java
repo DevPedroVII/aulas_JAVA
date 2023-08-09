@@ -15,6 +15,9 @@ public class Programa05 {
 		}
 		
 		Operador Ternario
+		
+		condição ? valor_se_verdadeiro : valor_se_falso
+
 		*/
 		numero = (valor > 0)? valor : 7;
 		System.out.println(numero);
