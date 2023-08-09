@@ -14,6 +14,7 @@ public class Programa05 {
 			numero = 7;
 		}
 		*/
+		numero = (valor > 0)? valor : 7;
 		System.out.println(numero);
 	}
 
