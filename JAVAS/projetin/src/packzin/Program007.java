@@ -18,10 +18,13 @@ public class Program007 {
 		nome = teclado.nextLine();
 		
 		System.out.println("DIga sua idade");
-		idade = teclado.nextInt();
+		// idade = teclado.nextInt(); Bug
+		idade = Integer.parseInt(nome, teclado.nextInt());
 		
 		System.out.println(nome + " Tem " + idade + " anos.");
 		teclado.close();
+		
+		}
 	}
 
 }
