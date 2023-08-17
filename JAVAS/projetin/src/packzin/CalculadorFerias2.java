@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class CalculadorFerias2 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.print("Informe o salário mensal: ");
+			double salarioMensal = scanner.nextDouble();
 
-        System.out.print("Informe o salário mensal: ");
-        double salarioMensal = scanner.nextDouble();
+			System.out.print("Informe quantos meses trabalhados: ");
+			int mesesTrabalhados = scanner.nextInt();
 
-        System.out.print("Informe quantos meses trabalhados: ");
-        int mesesTrabalhados = scanner.nextInt();
+			double ferias = calcularFerias(salarioMensal, mesesTrabalhados);
 
-        double ferias = calcularFerias(salarioMensal, mesesTrabalhados);
-
-        System.out.println("O valor das férias é: R$" + ferias);
+			System.out.println("O valor das férias é: R$" + ferias);
+		}
     }
 
     public static double calcularFerias(double salarioMensal, int mesesTrabalhados) {
