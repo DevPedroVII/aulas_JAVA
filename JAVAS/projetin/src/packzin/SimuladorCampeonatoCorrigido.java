@@ -5,10 +5,10 @@ import java.util.Random;
 public class SimuladorCampeonatoCorrigido {
     public static void main(String[] args) {
         final String[] TEAM_NAMES = {
-            "Flamengo", "Palmeiras", "São Paulo", "Santos", "Corinthians",
-            "Grêmio", "Fluminense", "Cruzeiro", "Internacional", "Atlético-MG",
-            "Bahia", "Botafogo", "Vasco", "Sport", "Ceará",
-            "Fortaleza", "Athletico-PR", "Goiás", "Chapecoense", "Avaí"
+        		"Flamengo", "Palmeiras", "São Paulo", "Santos", "Corinthians",
+                "Grêmio", "Fluminense", "Cruzeiro", "Internacional", "Atlético-MG",
+                "Bahia", "Botafogo", "Vasco", "Coritiba", "Cuiaba",
+                "Fortaleza", "Athletico-PR", "Goiás", "America-MG", "Bragantino"			
         };
         final int NUM_TEAMS = TEAM_NAMES.length;
         final int NUM_ROUNDS = 38;
@@ -34,12 +34,10 @@ public class SimuladorCampeonatoCorrigido {
                     if (i != j) {
                         int resultado = random.nextInt(3);  // 0: derrota, 1: empate, 2: vitória
 
-                        if (resultado == 0) {
-                            tabela[i][1] += POINTS_LOSS;
+                        if (resultado == 2) {
+                            tabela[i][1] += POINTS_WIN;
                         } else if (resultado == 1) {
                             tabela[i][1] += POINTS_DRAW;
-                        } else {
-                            tabela[i][1] += POINTS_WIN;
                         }
                     }
                 }
