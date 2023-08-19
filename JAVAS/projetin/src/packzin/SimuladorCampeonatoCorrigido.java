@@ -5,10 +5,10 @@ import java.util.Random;
 public class SimuladorCampeonatoCorrigido {
     public static void main(String[] args) {
         final String[] TEAM_NAMES = {
-        		"Flamengo", "Palmeiras", "São Paulo", "Santos", "Corinthians",
-                "Grêmio", "Fluminense", "Cruzeiro", "Internacional", "Atlético-MG",
-                "Bahia", "Botafogo", "Vasco", "Sport", "Ceará",
-                "Fortaleza", "Athletico-PR", "Goiás", "Chapecoense", "Avaí"
+            "Flamengo", "Palmeiras", "São Paulo", "Santos", "Corinthians",
+            "Grêmio", "Fluminense", "Cruzeiro", "Internacional", "Atlético-MG",
+            "Bahia", "Botafogo", "Vasco", "Sport", "Ceará",
+            "Fortaleza", "Athletico-PR", "Goiás", "Chapecoense", "Avaí"
         };
         final int NUM_TEAMS = TEAM_NAMES.length;
         final int NUM_ROUNDS = 38;
@@ -19,26 +19,29 @@ public class SimuladorCampeonatoCorrigido {
         Random random = new Random();
         int[][] tabela = new int[NUM_TEAMS][3];  // Array para armazenar pontos, saldo de gols e identificador da equipe
 
-        // Inicializa a tabela com identificadores de equipe e pontos aleatórios
+        // Inicializa a tabela com identificadores de equipe e pontos zerados
         for (int i = 0; i < NUM_TEAMS; i++) {
             tabela[i][0] = i;  // Identificador da equipe
-            tabela[i][1] = random.nextInt(50);  // Pontuação aleatória
         }
 
         // Simulação das rodadas
         for (int round = 1; round <= NUM_ROUNDS; round++) {
             System.out.println("Rodada " + round + ":");
 
-            // Simula o desempenho das equipes na rodada
+            // Simula os jogos entre as equipes
             for (int i = 0; i < NUM_TEAMS; i++) {
-                int resultado = random.nextInt(3);  // 0: derrota, 1: empate, 2: vitória
+                for (int j = 0; j < NUM_TEAMS; j++) {
+                    if (i != j) {
+                        int resultado = random.nextInt(3);  // 0: derrota, 1: empate, 2: vitória
 
-                if (resultado == 0) {
-                    tabela[i][1] += POINTS_LOSS;
-                } else if (resultado == 1) {
-                    tabela[i][1] += POINTS_DRAW;
-                } else {
-                    tabela[i][1] += POINTS_WIN;
+                        if (resultado == 0) {
+                            tabela[i][1] += POINTS_LOSS;
+                        } else if (resultado == 1) {
+                            tabela[i][1] += POINTS_DRAW;
+                        } else {
+                            tabela[i][1] += POINTS_WIN;
+                        }
+                    }
                 }
             }
         }
