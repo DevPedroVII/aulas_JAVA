@@ -8,21 +8,17 @@ public class SimuladorCampeonatoCorrigido {
         		"Flamengo", "Palmeiras", "São Paulo", "Santos", "Corinthians",
                 "Grêmio", "Fluminense", "Cruzeiro", "Internacional", "Atlético-MG",
                 "Bahia", "Botafogo", "Vasco", "Coritiba", "Cuiaba",
-                "Fortaleza", "Athletico-PR", "Goiás", "America-MG", "Bragantino"			
+                "Fortaleza", "Athletico-PR", "Goiás", "America-MG", "Bragantino"
         };
         final int NUM_TEAMS = TEAM_NAMES.length;
         final int NUM_ROUNDS = 38;
         final int POINTS_WIN = 3;
         final int POINTS_DRAW = 1;
-        final int POINTS_LOSS = 0;
+
+        int[][] tabela = new int[NUM_TEAMS][2];  // Array para armazenar pontos e identificador da equipe
+        inicializarTabela(tabela);
 
         Random random = new Random();
-        int[][] tabela = new int[NUM_TEAMS][3];  // Array para armazenar pontos, saldo de gols e identificador da equipe
-
-        // Inicializa a tabela com identificadores de equipe e pontos zerados
-        for (int i = 0; i < NUM_TEAMS; i++) {
-            tabela[i][0] = i;  // Identificador da equipe
-        }
 
         // Simulação das rodadas
         for (int round = 1; round <= NUM_ROUNDS; round++) {
@@ -44,30 +40,36 @@ public class SimuladorCampeonatoCorrigido {
             }
         }
 
-        // Ordena a tabela classificatória com base nos pontos
+        ordenarTabela(tabela);
+
+        imprimirClassificacao(tabela, TEAM_NAMES);
+        imprimirClassificados(tabela, TEAM_NAMES, 0, 4, "Libertadores");
+        imprimirClassificados(tabela, TEAM_NAMES, 4, 16, "Sul-Americana");
+        imprimirClassificados(tabela, TEAM_NAMES, NUM_TEAMS - 4, NUM_TEAMS, "Rebaixadas");
+    }
+
+    private static void inicializarTabela(int[][] tabela) {
+        for (int i = 0; i < tabela.length; i++) {
+            tabela[i][0] = i;  // Identificador da equipe
+        }
+    }
+
+    private static void ordenarTabela(int[][] tabela) {
         java.util.Arrays.sort(tabela, (a, b) -> Integer.compare(b[1], a[1]));
+    }
 
-        // Imprime a classificação final
+    private static void imprimirClassificacao(int[][] tabela, String[] teamNames) {
         System.out.println("\nClassificação Final:");
-        for (int i = 0; i < NUM_TEAMS; i++) {
+        for (int i = 0; i < tabela.length; i++) {
             String posicao = String.format("%2d", i + 1);
-            System.out.println(posicao + "ª - " + TEAM_NAMES[tabela[i][0]] + ": " + tabela[i][1] + " pontos");
+            System.out.println(posicao + "ª - " + teamNames[tabela[i][0]] + ": " + tabela[i][1] + " pontos");
         }
+    }
 
-        // Imprime os times que se classificaram para Libertadores, Sul-Americana e rebaixamento
-        System.out.println("\nClassificados para a Libertadores:");
-        for (int i = 0; i < 4; i++) {
-            System.out.println(TEAM_NAMES[tabela[i][0]]);
-        }
-
-        System.out.println("\nClassificados para a Sul-Americana:");
-        for (int i = 4; i < 16; i++) {
-            System.out.println(TEAM_NAMES[tabela[i][0]]);
-        }
-
-        System.out.println("\nEquipes Rebaixadas:");
-        for (int i = NUM_TEAMS - 4; i < NUM_TEAMS; i++) {
-            System.out.println(TEAM_NAMES[tabela[i][0]]);
+    private static void imprimirClassificados(int[][] tabela, String[] teamNames, int startIndex, int endIndex, String titulo) {
+        System.out.println("\nClassificados para " + titulo + ":");
+        for (int i = startIndex; i < endIndex; i++) {
+            System.out.println(teamNames[tabela[i][0]]);
         }
     }
 }
