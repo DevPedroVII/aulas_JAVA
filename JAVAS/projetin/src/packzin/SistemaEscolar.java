@@ -7,45 +7,45 @@ import java.util.Scanner;
 public class SistemaEscolar {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("=== Sistema Escolar ===");
-        System.out.print("Informe o nome do aluno: ");
-        String nomeAluno = scanner.nextLine();
-        
-        System.out.print("Informe a série (1 para Fundamental ou 2 para Médio): ");
-        int serie = scanner.nextInt();
-        
-        Aluno aluno = new Aluno(nomeAluno, serie);
-        
-        aluno.mostrarFichaMatricula();
-        
-        for (String materia : aluno.getMaterias()) {
-            System.out.println("Matéria: " + materia);
-            for (int unidade = 1; unidade <= 3; unidade++) {
-                System.out.print("Informe a nota da unidade " + unidade + ": ");
-                double nota = scanner.nextDouble();
-                aluno.addNota(materia, unidade, nota);
-            }
-            System.out.println();
-        }
-        
-        System.out.print("O aluno fez segunda chamada? (S/N): ");
-        char segundaChamada = scanner.next().charAt(0);
-        
-        if (segundaChamada == 'S' || segundaChamada == 's') {
-            System.out.print("Informe a matéria da segunda chamada: ");
-            scanner.nextLine(); // Limpar o buffer
-            String materiaSegundaChamada = scanner.nextLine();
-            
-            System.out.print("Informe a nota na prova de segunda chamada: ");
-            double notaSegundaChamada = scanner.nextDouble();
-            
-            aluno.processarSegundaChamada(materiaSegundaChamada, notaSegundaChamada);
-        }
-        
-        aluno.calcularMedia();
-        aluno.verificarAprovacao();
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("=== Sistema Escolar ===");
+			System.out.print("Informe o nome do aluno: ");
+			String nomeAluno = scanner.nextLine();
+			
+			System.out.print("Informe a série (1 para Fundamental ou 2 para Médio): ");
+			int serie = scanner.nextInt();
+			
+			Aluno aluno = new Aluno(nomeAluno, serie);
+			
+			aluno.mostrarFichaMatricula();
+			
+			for (String materia : aluno.getMaterias()) {
+			    System.out.println("Matéria: " + materia);
+			    for (int unidade = 1; unidade <= 3; unidade++) {
+			        System.out.print("Informe a nota da unidade " + unidade + ": ");
+			        double nota = scanner.nextDouble();
+			        aluno.addNota(materia, unidade, nota);
+			    }
+			    System.out.println();
+			}
+			
+			System.out.print("O aluno fez segunda chamada? (S/N): ");
+			char segundaChamada = scanner.next().charAt(0);
+			
+			if (segundaChamada == 'S' || segundaChamada == 's') {
+			    System.out.print("Informe a matéria da segunda chamada: ");
+			    scanner.nextLine(); // Limpar o buffer
+			    String materiaSegundaChamada = scanner.nextLine();
+			    
+			    System.out.print("Informe a nota na prova de segunda chamada: ");
+			    double notaSegundaChamada = scanner.nextDouble();
+			    
+			    aluno.processarSegundaChamada(materiaSegundaChamada, notaSegundaChamada);
+			}
+			
+			aluno.calcularMedia();
+			aluno.verificarAprovacao();
+		}
     }
 }
 
