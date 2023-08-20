@@ -148,5 +148,13 @@ class Aluno {
     public String[] getMaterias() {
         return (serie == 1) ? MATERIAS_FUNDAMENTAL : MATERIAS_MEDIO;
     }
+
+	public double getMediaRecuperacao() {
+		return mediaRecuperacao;
+	}
+
+	public void setMediaRecuperacao(double mediaRecuperacao) {
+		this.mediaRecuperacao = mediaRecuperacao;
+	}
 }
 
