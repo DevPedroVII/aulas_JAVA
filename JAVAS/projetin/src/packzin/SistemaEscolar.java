@@ -27,9 +27,24 @@ public class SistemaEscolar {
                 double nota = scanner.nextDouble();
                 aluno.addNota(materia, unidade, nota);
             }
+            System.out.println();
         }
         
-        aluno.calcularMedias();
+        System.out.print("O aluno fez segunda chamada? (S/N): ");
+        char segundaChamada = scanner.next().charAt(0);
+        
+        if (segundaChamada == 'S' || segundaChamada == 's') {
+            System.out.print("Informe a matéria da segunda chamada: ");
+            scanner.nextLine(); // Limpar o buffer
+            String materiaSegundaChamada = scanner.nextLine();
+            
+            System.out.print("Informe a nota na prova de segunda chamada: ");
+            double notaSegundaChamada = scanner.nextDouble();
+            
+            aluno.processarSegundaChamada(materiaSegundaChamada, notaSegundaChamada);
+        }
+        
+        aluno.calcularMedia();
         aluno.verificarAprovacao();
     }
 }
@@ -37,7 +52,7 @@ public class SistemaEscolar {
 class Aluno {
     private String nome;
     private int serie;
-    private Map<String, Map<Integer, Double>> notas;
+    private Map<String, double[]> notasPorMateria;
     private double mediaRecuperacao = 6;
     private double mediaAnual = 7;
     
@@ -54,15 +69,11 @@ class Aluno {
     public Aluno(String nome, int serie) {
         this.nome = nome;
         this.serie = serie;
-        this.notas = new HashMap<>();
-        
-        for (String materia : getMaterias()) {
-            notas.put(materia, new HashMap<>());
+        this.notasPorMateria = new HashMap<>();
+        String[] materias = (serie == 1) ? MATERIAS_FUNDAMENTAL : MATERIAS_MEDIO;
+        for (String materia : materias) {
+            this.notasPorMateria.put(materia, new double[3]); // 3 unidades
         }
-    }
-
-    public String[] getMaterias() {
-        return (serie == 1) ? MATERIAS_FUNDAMENTAL : MATERIAS_MEDIO;
     }
 
     public void mostrarFichaMatricula() {
@@ -74,42 +85,68 @@ class Aluno {
     }
 
     public void addNota(String materia, int unidade, double nota) {
-        Map<Integer, Double> unidadeNotas = notas.get(materia);
-        if (unidadeNotas != null) {
-            unidadeNotas.put(unidade, nota);
+        double[] notasMateria = notasPorMateria.get(materia);
+        if (unidade >= 1 && unidade <= notasMateria.length) {
+            notasMateria[unidade - 1] = nota;
         }
     }
 
-    public void calcularMedias() {
-        for (String materia : notas.keySet()) {
-            Map<Integer, Double> unidadeNotas = notas.get(materia);
-            double soma = 0;
-            int count = 0;
-            for (double nota : unidadeNotas.values()) {
-                soma += nota;
+    public void processarSegundaChamada(String materia, double notaSegundaChamada) {
+        double[] notasMateria = notasPorMateria.get(materia);
+        if (notaSegundaChamada <= 4) {
+            notasMateria[0] += notaSegundaChamada; // Adiciona à primeira unidade
+            System.out.println("Nota da segunda chamada adicionada à matéria " + materia);
+        } else {
+            System.out.println("Algo de errado aconteceu na segunda chamada de " + materia);
+        }
+    }
+
+    public void calcularMedia() {
+        double soma = 0;
+        int count = 0;
+        for (String materia : notasPorMateria.keySet()) {
+            double[] notasMateria = notasPorMateria.get(materia);
+            double somaMateria = 0;
+            for (double nota : notasMateria) {
+                somaMateria += nota;
                 count++;
             }
-            double media = soma / count;
-            System.out.println("Média de " + materia + ": " + media);
-            unidadeNotas.put(0, media); // Armazenar a média anual na posição 0
+            double mediaMateria = somaMateria / notasMateria.length;
+            System.out.println("Média em " + materia + ": " + mediaMateria);
         }
     }
 
     public void verificarAprovacao() {
-        boolean passouDeAno = true;
-        
-        for (String materia : notas.keySet()) {
-            double media = notas.get(materia).get(0); // Pegar a média anual
-            if (media < mediaAnual) {
-                passouDeAno = false;
-                break;
+        boolean passou = true;
+
+        for (String materia : notasPorMateria.keySet()) {
+            double[] notasMateria = notasPorMateria.get(materia);
+            double mediaMateria = calcularMediaMateria(notasMateria);
+
+            if (mediaMateria < mediaAnual) {
+                System.out.println("Aluno em recuperação em " + materia + ". Média: " + mediaMateria);
+                passou = false;
             }
         }
 
-        if (passouDeAno) {
+        if (passou) {
             System.out.println("Parabéns! " + nome + " passou de ano!");
         } else {
-            System.out.println("Você não atingiu a média necessária e está reprovado(a). Estude mais para o próximo ano!");
+            System.out.println("Infelizmente, " + nome + " não passou de ano.");
+            System.out.println("Você tem a opção de fazer recuperação em cada matéria.");
         }
     }
+
+    private double calcularMediaMateria(double[] notasMateria) {
+        double soma = 0;
+        for (double nota : notasMateria) {
+            soma += nota;
+        }
+        return soma / notasMateria.length;
+    }
+
+    public String[] getMaterias() {
+        return (serie == 1) ? MATERIAS_FUNDAMENTAL : MATERIAS_MEDIO;
+    }
 }
+
