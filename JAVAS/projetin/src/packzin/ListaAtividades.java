@@ -7,40 +7,40 @@ import java.util.Scanner;
 public class ListaAtividades {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
+			List<Atividade> listaAtividades = new ArrayList<>();
+			int maxAtividades = 24; // O número máximo de atividades é igual ao número de horas em um dia
+			
+			System.out.println("Bem-vindo à Lista de Atividades!");
+			System.out.println("Você pode adicionar até " + maxAtividades + " atividades.");
 
-        List<Atividade> listaAtividades = new ArrayList<>();
-        int maxAtividades = 24; // O número máximo de atividades é igual ao número de horas em um dia
-        
-        System.out.println("Bem-vindo à Lista de Atividades!");
-        System.out.println("Você pode adicionar até " + maxAtividades + " atividades.");
+			while (listaAtividades.size() < maxAtividades) {
+			    System.out.print("Informe o nome da atividade (ou digite 'sair' para encerrar): ");
+			    String nomeAtividade = scanner.nextLine();
 
-        while (listaAtividades.size() < maxAtividades) {
-            System.out.print("Informe o nome da atividade (ou digite 'sair' para encerrar): ");
-            String nomeAtividade = scanner.nextLine();
+			    if (nomeAtividade.equalsIgnoreCase("sair")) {
+			        break;
+			    }
 
-            if (nomeAtividade.equalsIgnoreCase("sair")) {
-                break;
-            }
+			    System.out.print("Informe a duração da atividade em horas: ");
+			    double duracaoAtividade = scanner.nextDouble();
+			    scanner.nextLine(); // Limpar o buffer
 
-            System.out.print("Informe a duração da atividade em horas: ");
-            double duracaoAtividade = scanner.nextDouble();
-            scanner.nextLine(); // Limpar o buffer
+			    if (duracaoAtividade <= 0 || duracaoAtividade > 24) {
+			        System.out.println("Duração inválida! A duração deve estar entre 0 e 24 horas.");
+			        continue;
+			    }
 
-            if (duracaoAtividade <= 0 || duracaoAtividade > 24) {
-                System.out.println("Duração inválida! A duração deve estar entre 0 e 24 horas.");
-                continue;
-            }
+			    Atividade atividade = new Atividade(nomeAtividade, duracaoAtividade);
+			    listaAtividades.add(atividade);
+			    System.out.println("Atividade adicionada à lista.");
+			}
 
-            Atividade atividade = new Atividade(nomeAtividade, duracaoAtividade);
-            listaAtividades.add(atividade);
-            System.out.println("Atividade adicionada à lista.");
-        }
-
-        System.out.println("=== Lista de Atividades ===");
-        for (Atividade atividade : listaAtividades) {
-            System.out.println(atividade);
-        }
+			System.out.println("=== Lista de Atividades ===");
+			for (Atividade atividade : listaAtividades) {
+			    System.out.println(atividade);
+			}
+		}
     }
 }
 
