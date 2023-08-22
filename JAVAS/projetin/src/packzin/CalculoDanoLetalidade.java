@@ -18,18 +18,19 @@ public class CalculoDanoLetalidade {
         // Cálculo do dano com Letalidade
         double danoCausado = calcularDanoLetalidade(danoFisicoBase, letalidade, resistenciaFisica);
 
-        if (danoCausado < 0) {
-            danoCausado = 0; // Evita que o dano seja negativo
-        }
-
         System.out.println("O dano causado com base na Letalidade é: " + danoCausado);
 
         scanner.close();
     }
 
     public static double calcularDanoLetalidade(double danoFisicoBase, double letalidade, double resistenciaFisica) {
-        // Aplicando a fórmula: Dano físico causado = Dano físico base * (1 - Resistência física do alvo) + Letalidade
+        // Evitando valores negativos para resistência física e letalidade
+        resistenciaFisica = Math.max(0, Math.min(1, resistenciaFisica));
+        letalidade = Math.max(0, letalidade);
+
+        // Cálculo do dano físico causado
         double danoCausado = danoFisicoBase * (1 - resistenciaFisica) + letalidade;
-        return danoCausado;
+
+        return Math.max(0, danoCausado); // Evita que o dano seja negativo
     }
 }
