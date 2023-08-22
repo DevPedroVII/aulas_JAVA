@@ -18,6 +18,10 @@ public class CalculoDanoLetalidade {
         // Cálculo do dano com Letalidade
         double danoCausado = calcularDanoLetalidade(danoFisicoBase, letalidade, resistenciaFisica);
 
+        if (danoCausado < 0) {
+            danoCausado = 0; // Evita que o dano seja negativo
+        }
+
         System.out.println("O dano causado com base na Letalidade é: " + danoCausado);
 
         scanner.close();
