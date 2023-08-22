@@ -1,20 +1,31 @@
 package packzin;
 
-public class CalculoDanoLetalidade {
+import java.util.Scanner;
 
-    public static double calcularDanoComLetalidade(double danoBase, double resistenciaFisicaAlvo, double letalidade) {
-        double danoSemLetalidade = danoBase * (1 - resistenciaFisicaAlvo);
-        double danoComLetalidade = danoSemLetalidade + letalidade;
-        return danoComLetalidade;
+public class CalculoDanoLetalidade {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite a quantidade de Letalidade do item: ");
+        double letalidade = scanner.nextDouble();
+
+        System.out.print("Digite a resistência física do alvo: ");
+        double resistenciaFisica = scanner.nextDouble();
+
+        System.out.print("Digite o dano físico base: ");
+        double danoFisicoBase = scanner.nextDouble();
+
+        // Cálculo do dano com Letalidade
+        double danoCausado = calcularDanoLetalidade(danoFisicoBase, letalidade, resistenciaFisica);
+
+        System.out.println("O dano causado com base na Letalidade é: " + danoCausado);
+
+        scanner.close();
     }
 
-    public static void main(String[] args) {
-        double danoBase = 100;  // Dano físico base do ataque ou habilidade
-        double resistenciaFisicaAlvo = 0.5;  // Resistência física do alvo (ex: 0.5 representa 50% de resistência)
-        double letalidade = 20;  // Valor de letalidade do seu campeão
-        
-        double danoCalculado = calcularDanoComLetalidade(danoBase, resistenciaFisicaAlvo, letalidade);
-        
-        System.out.println("Dano causado com letalidade: " + danoCalculado);
+    public static double calcularDanoLetalidade(double danoFisicoBase, double letalidade, double resistenciaFisica) {
+        // Aplicando a fórmula: Dano físico causado = Dano físico base * (1 - Resistência física do alvo) + Letalidade
+        double danoCausado = danoFisicoBase * (1 - resistenciaFisica) + letalidade;
+        return danoCausado;
     }
 }
