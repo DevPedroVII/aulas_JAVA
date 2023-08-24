@@ -21,7 +21,7 @@ public class AvaliacaoFrutasAleatorias {
             "Melancia", "Kiwi", "Manga", "Pera", "Cereja", "Goiaba", "Caju",
             "Framboesa", "Melão", "Ameixa", "Maracujá", "Jabuticaba", "Tangerina",
             "Limão", "Coco", "Amora", "Figo", "Pitaya", "Guaraná", "Romã",
-            "Açaí", "Jambo", "Acerola", "Kiwi", "Lichia", "Cacto", "Durião"
+            "Açaí", "Jambo", "Acerola"
         };
 
         Collections.addAll(frutasSugeridas, frutasAleatorias);
