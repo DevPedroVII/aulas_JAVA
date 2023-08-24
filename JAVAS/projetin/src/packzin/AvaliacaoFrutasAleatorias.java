@@ -80,5 +80,7 @@ public class AvaliacaoFrutasAleatorias {
 
             System.out.println();
         }
+
+        System.out.println("\nLembre-se da importância de comer frutas para uma dieta saudável!");
     }
 }
