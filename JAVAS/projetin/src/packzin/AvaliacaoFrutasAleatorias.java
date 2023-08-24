@@ -11,9 +11,9 @@ public class AvaliacaoFrutasAleatorias {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
-        List<String> frutas = new ArrayList<>();
-        List<Integer> notas = new ArrayList<>();
-        List<String> frutasSugeridas = new ArrayList<>();
+        List<String> frutas = new ArrayList<>();   // Lista para armazenar as frutas informadas pelo usuário
+        List<Integer> notas = new ArrayList<>();    // Lista para armazenar as notas das frutas
+        List<String> frutasSugeridas = new ArrayList<>();   // Lista para sugestões de frutas aleatórias
 
         // Frutas para sugestões aleatórias
         String[] frutasAleatorias = {
@@ -21,7 +21,7 @@ public class AvaliacaoFrutasAleatorias {
             "Melancia", "Kiwi", "Manga", "Pera", "Cereja", "Goiaba", "Caju",
             "Framboesa", "Melão", "Ameixa", "Maracujá", "Jabuticaba", "Tangerina",
             "Limão", "Coco", "Amora", "Figo", "Pitaya", "Guaraná", "Romã",
-            "Açaí", "Jambo", "Acerola"
+            "Açaí", "Jambo", "Acerola", "Kiwi", "Lichia", "Cacto", "Durião"
         };
 
         Collections.addAll(frutasSugeridas, frutasAleatorias);
@@ -43,13 +43,16 @@ public class AvaliacaoFrutasAleatorias {
 
             frutasSugeridas.remove(nomeFruta);
 
-            System.out.print("Deseja uma sugestão de fruta para comer? (sim/não): ");
+            System.out.print("Deseja uma sugestão de fruta para comer? (sim/não/não sei): ");
             String resposta = scanner.nextLine();
 
             if (resposta.equalsIgnoreCase("sim")) {
                 int indiceSugestao = random.nextInt(frutasSugeridas.size());
                 String sugestao = frutasSugeridas.get(indiceSugestao);
                 System.out.println("Que tal experimentar uma " + sugestao + "?");
+                frutasSugeridas.remove(indiceSugestao);
+            } else if (resposta.equalsIgnoreCase("não sei")) {
+                System.out.println("Que tal tentar uma " + frutasSugeridas.get(random.nextInt(frutasSugeridas.size())) + "?");
             }
         }
 
