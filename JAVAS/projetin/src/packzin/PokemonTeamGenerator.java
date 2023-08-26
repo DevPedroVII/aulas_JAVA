@@ -5,7 +5,7 @@ import java.util.Random;
 public class PokemonTeamGenerator {
     public static void main(String[] args) {
         String[] pokemonList = {
-        	    "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
+        		"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
         	    "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree",
         	    "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata",
         	    "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu",
@@ -23,8 +23,11 @@ public class PokemonTeamGenerator {
         	    "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak",
         	    "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn",
         	    "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen",
-        	    "Seaking"
-
+        	    "Seaking", "Staryu", "Starmie", "Mr. Mime", "Scyther", "Jynx", "Electabuzz",
+        	    "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto",
+        	    "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar",
+        	    "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos",
+        	    "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"
         };
 
         int teamSize = 6;
