@@ -1,6 +1,7 @@
 package packzin;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class PokemonTeamGenerator {
     public static void main(String[] args) {
@@ -31,14 +32,31 @@ public class PokemonTeamGenerator {
         };
 
         int teamSize = 6;
-        Random random = new Random();
+        String[] team = generateRandomPokemonTeam(pokemonList, teamSize);
 
-        System.out.println("Time de Pokémon gerado:");
+        System.out.println("Bem-vindo ao Gerador de Times de Pokémon!");
+        System.out.print("Por favor, insira seu nome: ");
+        Scanner scanner = new Scanner(System.in);
+        String userName = scanner.nextLine();
+        scanner.close();
+
+        System.out.println("\nOlá, " + userName + "!");
+        System.out.println("Seu time de Pokémon da 1ª geração foi gerado:");
+
+        for (int i = 0; i < team.length; i++) {
+            System.out.println("Pokémon " + (i + 1) + ": " + team[i]);
+        }
+    }
+
+    public static String[] generateRandomPokemonTeam(String[] pokemonList, int teamSize) {
+        Random random = new Random();
+        String[] team = new String[teamSize];
 
         for (int i = 0; i < teamSize; i++) {
             int randomIndex = random.nextInt(pokemonList.length);
-            String randomPokemon = pokemonList[randomIndex];
-            System.out.println("Pokémon " + (i + 1) + ": " + randomPokemon);
+            team[i] = pokemonList[randomIndex];
         }
+
+        return team;
     }
 }
