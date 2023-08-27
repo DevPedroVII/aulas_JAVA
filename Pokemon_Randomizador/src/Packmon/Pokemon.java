@@ -1,5 +1,5 @@
 package Packmon;
-
+//Esta classe representará um Pokémon no time. Cada Pokémon terá um nome e um nível.
 public class Pokemon {
     private String name;
     private int level;
