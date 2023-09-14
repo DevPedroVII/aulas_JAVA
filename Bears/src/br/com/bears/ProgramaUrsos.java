@@ -4,21 +4,41 @@ import java.util.Scanner;
 
 public class ProgramaUrsos {
     public static void main(String[] args) {
-        // Criando instâncias de ursos específicos
-        Urso ursoPolar = new UrsoPolar();
-        Urso ursoNegro = new UrsoNegro();
-        Urso ursoPanda = new UrsoPanda();
-        Urso ursoGrizzly = new UrsoGrizzly();
-        Urso ursoAndino = new UrsoAndino();
-
-        // Exibindo informações sobre os ursos
-        exibirInformacoes(ursoPolar);
-        exibirInformacoes(ursoNegro);
-        exibirInformacoes(ursoPanda);
-        exibirInformacoes(ursoGrizzly);
-        exibirInformacoes(ursoAndino);
+        Scanner scanner = new Scanner(System.in);
+        
+        // Apresentação das opções ao cliente
+        System.out.println("Escolha um tipo de urso para obter informações:");
+        System.out.println("1. Urso Polar");
+        System.out.println("2. Urso Negro");
+        System.out.println("3. Urso Panda");
+        System.out.println("4. Urso Grizzly");
+        System.out.println("5. Urso Andino");
+        
+        int escolha = scanner.nextInt();
+        
+        switch (escolha) {
+            case 1:
+                exibirInformacoes(new UrsoPolar());
+                break;
+            case 2:
+                exibirInformacoes(new UrsoNegro());
+                break;
+            case 3:
+                exibirInformacoes(new UrsoPanda());
+                break;
+            case 4:
+                exibirInformacoes(new UrsoGrizzly());
+                break;
+            case 5:
+                exibirInformacoes(new UrsoAndino());
+                break;
+            default:
+                System.out.println("Escolha inválida.");
+        }
+        
+        scanner.close();
     }
-
+    
     // Método para exibir informações de um Urso
     public static void exibirInformacoes(Urso urso) {
         System.out.println("Nome Científico: " + urso.getNomeCientifico());
@@ -30,6 +50,5 @@ public class ProgramaUrsos {
         System.out.println("Tamanho Médio: " + urso.getTamanhoMedio());
         System.out.println("Peso Médio: " + urso.getPesoMedio());
         System.out.println("Tempo de Vida: " + urso.getTempoVida());
-        System.out.println();
     }
 }
