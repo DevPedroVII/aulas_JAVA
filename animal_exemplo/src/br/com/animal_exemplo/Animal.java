@@ -23,4 +23,4 @@ public abstract class Animal implements AnimalInterface {
      System.out.println(nome + " move-se de forma genérica.");
  }
 }
-}
+
