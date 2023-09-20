@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado</title>
+    <style>
+        /* Estilos CSS para melhorar a aparência */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #products, #cart {
+            width: 45%;
+            display: inline-block;
+            vertical-align: top;
+            padding: 10px;
+        }
+
+        #products {
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        #cart {
+            border: 1px solid #333;
+            background-color: #f4f4f4;
+        }
+
+        div > div {
+            border: 1px solid #eee;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Supermercado</h1>
+
+    <div id="products">
+        <h2>Produtos Disponíveis</h2>
+    </div>
+
+    <div id="cart">
+        <h2>Carrinho de Compras</h2>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: "Arroz", price: 10.0 },
+            { id: 2, name: "Feijão", price: 5.0 },
+            { id: 3, name: "Macarrão", price: 3.0 },
+            { id: 4, name: "Leite", price: 2.5 },
+            // Adicione mais produtos conforme necessário
+        ];
+
+        const cart = [];
+
+        function displayProducts() {
+            const productsDiv = document.getElementById("products");
+
+            productsDiv.innerHTML = "<h2>Produtos Disponíveis</h2>";
+
+            products.forEach(product => {
+                productsDiv.innerHTML += `
+                    <div>
+                        <span>${product.name} - R$${product.price.toFixed(2)}</span>
+                        <button onclick="addToCart(${product.id})">Adicionar ao Carrinho</button>
+                    </div>
+                `;
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                cart.push(product);
+                updateCart();
+            }
+        }
+
+        function updateCart() {
+            const cartDiv = document.getElementById("cart");
+
+            cartDiv.innerHTML = "<h2>Carrinho de Compras</h2>";
+
+            if (cart.length === 0) {
+                cartDiv.innerHTML += "<p>O carrinho está vazio.</p>";
+            } else {
+                cart.forEach(product => {
+                    cartDiv.innerHTML += `
+                        <div>
+                            <span>${product.name} - R$${product.price.toFixed(2)}</span>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        displayProducts();
+    </script>
+</body>
+</html>
